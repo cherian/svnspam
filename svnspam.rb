@@ -971,11 +971,18 @@ class UnifiedDiffColouriser < LineConsumer
         when "+" then "added"
         when "-" then "removed"
       end
+      
+      currentBg = case @currentStyle
+        when "context" then "#eeeeee"
+        when "added" then "#ccf7cc"
+        when "removed" then "#f7cccc"
+      end
+      
       unless nextState == nil
         if @currentStyle=='info'
           print("<pre style=\"margin:0;\"><small id=\"info\" style=\"color:#888888;\">")
         else
-          print("<pre style=\"margin:0;\" id=\"#{@currentStyle}\">")
+          print("<pre style=\"margin:0;background-color:#{currentBg}\">")
         end
       end
     end
